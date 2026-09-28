@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" font-family="Arial" font-size="14">
+<rect width="640" height="260" fill="#fff"/>
+<rect x="30" y="30" width="230" height="150" fill="#eef" stroke="#335"/>
+<text x="45" y="55" font-weight="bold">restaurantes</text>
+<text x="45" y="85">id INT (PK)</text><text x="45" y="110">nombre VARCHAR(45)</text>
+<text x="45" y="135">created_at DATETIME</text><text x="45" y="160">updated_at DATETIME</text>
+<rect x="380" y="30" width="230" height="200" fill="#efe" stroke="#353"/>
+<text x="395" y="55" font-weight="bold">tacos</text>
+<text x="395" y="85">id INT (PK)</text><text x="395" y="110">tortilla VARCHAR(45)</text>
+<text x="395" y="135">guiso VARCHAR(45)</text><text x="395" y="160">salsa VARCHAR(45)</text>
+<text x="395" y="185">restaurante_id INT (FK)</text><text x="395" y="210">created_at / updated_at</text>
+<line x1="260" y1="85" x2="380" y2="185" stroke="#000" stroke-width="2"/>
+<text x="265" y="80">1</text><text x="362" y="180">N</text>
+</svg>

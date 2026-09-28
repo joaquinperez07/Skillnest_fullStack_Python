@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" font-family="Arial" font-size="14">
+<rect width="900" height="240" fill="#fff"/>
+<rect x="20" y="30" width="230" height="130" fill="#eef" stroke="#335"/>
+<text x="35" y="55" font-weight="bold">estudiantes</text>
+<text x="35" y="85">id_estudiante INT (PK)</text><text x="35" y="110">nombre VARCHAR(100)</text>
+<text x="35" y="135">email VARCHAR(100)</text><text x="35" y="155">created_at TIMESTAMP</text>
+<rect x="335" y="30" width="230" height="100" fill="#ffe" stroke="#553"/>
+<text x="350" y="55" font-weight="bold">inscripciones</text>
+<text x="350" y="85">estudiante_id INT (PK, FK)</text><text x="350" y="110">curso_id INT (PK, FK)</text>
+<rect x="650" y="30" width="230" height="130" fill="#efe" stroke="#353"/>
+<text x="665" y="55" font-weight="bold">cursos</text>
+<text x="665" y="85">id_curso INT (PK)</text><text x="665" y="110">nombre_curso VARCHAR(100)</text>
+<text x="665" y="135">descripcion TEXT</text><text x="665" y="155">created_at TIMESTAMP</text>
+<line x1="250" y1="85" x2="335" y2="85" stroke="#000" stroke-width="2"/>
+<line x1="565" y1="85" x2="650" y2="85" stroke="#000" stroke-width="2"/>
+<text x="255" y="78">1</text><text x="318" y="78">N</text>
+<text x="570" y="78">N</text><text x="635" y="78">1</text>
+</svg>
