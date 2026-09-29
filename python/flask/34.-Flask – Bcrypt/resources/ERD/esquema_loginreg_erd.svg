@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" font-family="Arial" font-size="14">
+<rect width="360" height="220" fill="#fff"/>
+<rect x="30" y="30" width="300" height="170" fill="#eef" stroke="#335"/>
+<text x="45" y="55" font-weight="bold">usuarios</text>
+<text x="45" y="85">id INT (PK, AUTO_INCREMENT)</text>
+<text x="45" y="108">nombre VARCHAR(100)</text>
+<text x="45" y="131">apellido VARCHAR(100)</text>
+<text x="45" y="154">email VARCHAR(150) UNIQUE</text>
+<text x="45" y="177">password VARCHAR(255)</text>
+</svg>
