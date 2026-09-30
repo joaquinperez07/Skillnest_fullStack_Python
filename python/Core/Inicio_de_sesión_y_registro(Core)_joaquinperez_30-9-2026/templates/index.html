@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inicio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <section class="card">
+      <h2>Registro</h2>
+      {% with mensajes = get_flashed_messages(category_filter=["registro"]) %}
+        {% if mensajes %}
+          <ul class="errores">
+            {% for m in mensajes %}<li>{{ m }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      <form action="/registrar" method="post">
+        <label>Nombre <input type="text" name="first_name"></label>
+        <label>Apellido <input type="text" name="last_name"></label>
+        <label>E-mail <input type="email" name="email"></label>
+        <label>Fecha de nacimiento <input type="date" name="birth_date"></label>
+        <label>Género
+          <select name="gender">
+            <option value="">Selecciona...</option>
+            {% for g in generos %}<option value="{{ g }}">{{ g }}</option>{% endfor %}
+          </select>
+        </label>
+        <label>Contraseña <input type="password" name="password"></label>
+        <label>Conf. Contraseña <input type="password" name="confirm_password"></label>
+        <label class="check"><input type="checkbox" name="terms" value="1"> Acepto los términos y condiciones</label>
+        <button type="submit">Registrar</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Inicio de Sesión</h2>
+      {% with mensajes = get_flashed_messages(category_filter=["login"]) %}
+        {% if mensajes %}
+          <ul class="errores">
+            {% for m in mensajes %}<li>{{ m }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      <form action="/login" method="post">
+        <label>E-mail <input type="email" name="email"></label>
+        <label>Contraseña <input type="password" name="password"></label>
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+    </section>
+  </div>
+</body>
+</html>

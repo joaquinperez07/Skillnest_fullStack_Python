@@ -1,0 +1,13 @@
+* { box-sizing: border-box; }
+body { font-family: system-ui, sans-serif; background: #f4f5f7; margin: 0; padding: 2rem; color: #222; }
+.container { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; align-items: flex-start; }
+.card { background: #fff; padding: 1.5rem 2rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.1); width: 340px; }
+h2 { text-align: center; margin-top: 0; }
+label { display: flex; flex-direction: column; font-size: .9rem; margin-bottom: .8rem; gap: .25rem; }
+label.check { flex-direction: row; align-items: center; }
+input, select { padding: .5rem; border: 1px solid #999; border-radius: 4px; font-size: 1rem; }
+button { display: block; margin: 1rem auto 0; padding: .55rem 1.4rem; border: 2px solid #222; background: #fff; border-radius: 4px; cursor: pointer; font-weight: 600; }
+button:hover { background: #222; color: #fff; }
+.errores { background: #fdecea; color: #b3261e; border-radius: 6px; padding: .6rem 1.4rem; font-size: .85rem; }
+.bienvenida { max-width: 600px; margin: 4rem auto; background: #fff; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.bienvenida a { color: #1a5fd0; }
