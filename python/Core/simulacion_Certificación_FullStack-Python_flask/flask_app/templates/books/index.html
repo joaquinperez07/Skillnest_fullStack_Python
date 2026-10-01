@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}BookHub - Mis Libros{% endblock %}
+
+{% block content %}
+{% with categories = ['success', 'book'] %}{% include 'partials/flash.html' %}{% endwith %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Mis Libros</h2>
+    <a href="/libros/nuevo" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Nuevo Libro</a>
+</div>
+
+<div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover align-middle bg-white">
+        <thead class="table-light">
+            <tr><th>Título</th><th>Autor</th><th>Género</th><th>Fecha</th><th>Favoritos</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+            {% for book in my_books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.genre }}</td>
+                <td>{{ book.publication_date }}</td>
+                <td>{{ book.favorites_count }}</td>
+                <td class="text-nowrap">
+                    <a href="/libros/{{ book.id }}">Ver</a> |
+                    <a href="/libros/editar/{{ book.id }}">Editar</a> |
+                    <form action="/libros/borrar/{{ book.id }}" method="post" class="d-inline"
+                          onsubmit="return confirm('¿Seguro que deseas eliminar este libro?');">
+                        <button type="submit" class="btn btn-link text-danger p-0 align-baseline">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6" class="text-center text-muted">Aún no has publicado libros.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h3 class="mb-3">Libros de la Comunidad</h3>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle bg-white">
+        <thead class="table-light">
+            <tr><th>Título</th><th>Autor</th><th>Género</th><th>Publicado por</th><th>Favoritos</th><th>Acción</th></tr>
+        </thead>
+        <tbody>
+            {% for book in community_books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.genre }}</td>
+                <td>{{ book.publisher }}</td>
+                <td>{{ book.favorites_count }}</td>
+                <td><a href="/libros/{{ book.id }}">Ver</a></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6" class="text-center text-muted">Aún no hay libros de otros usuarios.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

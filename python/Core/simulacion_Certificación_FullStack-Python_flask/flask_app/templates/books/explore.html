@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}BookHub - Explorar{% endblock %}
+
+{% block content %}
+{% with categories = ['success', 'book'] %}{% include 'partials/flash.html' %}{% endwith %}
+<h2 class="mb-3">Explorar libros</h2>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle bg-white">
+        <thead class="table-light">
+            <tr><th>Título</th><th>Autor</th><th>Género</th><th>Publicado por</th><th>Favoritos</th><th>Acción</th></tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.genre }}</td>
+                <td>{{ book.publisher }}</td>
+                <td>{{ book.favorites_count }}</td>
+                <td><a href="/libros/{{ book.id }}">Ver</a></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6" class="text-center text-muted">No hay libros publicados todavía.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

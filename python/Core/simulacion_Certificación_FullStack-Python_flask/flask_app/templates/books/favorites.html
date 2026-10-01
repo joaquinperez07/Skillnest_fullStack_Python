@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}BookHub - Mis Favoritos{% endblock %}
+
+{% block content %}
+{% with categories = ['success', 'book'] %}{% include 'partials/flash.html' %}{% endwith %}
+<h2 class="mb-3">Mis Libros Favoritos</h2>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle bg-white">
+        <thead class="table-light">
+            <tr><th>Título</th><th>Autor</th><th>Género</th><th>Fecha</th><th>Acción</th></tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.genre }}</td>
+                <td>{{ book.publication_date }}</td>
+                <td><a href="/libros/{{ book.id }}">Ver</a></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5" class="text-center text-muted">Todavía no tienes libros favoritos.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

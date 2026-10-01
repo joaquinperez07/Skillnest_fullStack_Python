@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}BookHub - Login / Registro{% endblock %}
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h1 class="display-4 fw-bold"><i class="bi bi-book-half me-2"></i>BookHub</h1>
+    <p class="lead">Comparte, descubre y comenta libros</p>
+</div>
+
+<div class="row justify-content-center g-4">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h3 class="card-title mb-3">Crear Cuenta</h3>
+                {% with categories = ['register'] %}{% include 'partials/flash.html' %}{% endwith %}
+                <form action="/registro" method="post">
+                    <div class="mb-2">
+                        <label class="form-label" for="first_name">Nombre</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="last_name">Apellido</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="reg_email">E-mail</label>
+                        <input type="email" class="form-control" id="reg_email" name="email" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="reg_password">Contraseña</label>
+                        <input type="password" class="form-control" id="reg_password" name="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="confirm_password">Confirmar Contraseña</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Registrarse</button>
+                    <a href="#login-card" class="d-block mt-2 small">¿Ya tienes cuenta? Inicia sesión</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4" id="login-card">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h3 class="card-title mb-3">Iniciar Sesión</h3>
+                {% with categories = ['login'] %}{% include 'partials/flash.html' %}{% endwith %}
+                <form action="/login" method="post">
+                    <div class="mb-2">
+                        <label class="form-label" for="login_email">E-mail</label>
+                        <input type="email" class="form-control" id="login_email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="login_password">Contraseña</label>
+                        <input type="password" class="form-control" id="login_password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Iniciar Sesión</button>
+                    <a href="#first_name" class="d-block mt-2 small">¿No tienes cuenta? Regístrate</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

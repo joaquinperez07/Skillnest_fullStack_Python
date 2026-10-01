@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}BookHub - Detalle del Libro{% endblock %}
+
+{% block content %}
+{% with categories = ['success', 'book'] %}{% include 'partials/flash.html' %}{% endwith %}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 mb-3 mb-md-0">
+                <div class="book-cover d-flex align-items-center justify-content-center">
+                    <i class="bi bi-image fs-1 text-white"></i>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h3>{{ book.title }}</h3>
+                <p class="mb-1"><strong>Autor:</strong> {{ book.author }}</p>
+                <p class="mb-1"><strong>Género:</strong> {{ book.genre }}</p>
+                <p class="mb-1"><strong>Publicado por:</strong> {{ book.publisher }}</p>
+                <p class="mb-2"><strong>Fecha:</strong> {{ book.publication_date }}</p>
+
+                {# Si el usuario ya lo agregó a favoritos, el botón desaparece #}
+                {% if not is_favorite %}
+                <form action="/favoritos/agregar/{{ book.id }}" method="post" class="mb-3">
+                    <button type="submit" class="btn btn-outline-dark btn-sm">
+                        <i class="bi bi-heart-fill"></i> Agregar a Favoritos
+                    </button>
+                </form>
+                {% endif %}
+
+                <p><strong>Descripción:</strong> {{ book.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h5>Usuarios que agregaron este libro a favoritos ({{ fans|length }})</h5>
+<ul class="list-group mb-3">
+    {% for fan in fans %}
+    <li class="list-group-item"><i class="bi bi-person-circle me-2"></i>{{ fan.first_name }}</li>
+    {% else %}
+    <li class="list-group-item text-muted">Nadie ha agregado este libro a favoritos todavía.</li>
+    {% endfor %}
+</ul>
+
+<a href="/libros"><i class="bi bi-arrow-left"></i> Volver a Mis Libros</a>
+{% endblock %}

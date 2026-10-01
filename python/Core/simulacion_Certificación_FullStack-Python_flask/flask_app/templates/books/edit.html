@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}BookHub - Editar Libro{% endblock %}
+
+{% block content %}
+<h2 class="mb-3">Editar Libro</h2>
+{% with categories = ['book'] %}{% include 'partials/flash.html' %}{% endwith %}
+{# Formulario pre-poblado con la información actual (o con lo enviado si hubo error) #}
+{% set values = form_data or book %}
+{% set action = '/libros/actualizar/' ~ book.id %}
+{% set submit_label = 'Actualizar' %}
+{% include 'books/_form.html' %}
+{% endblock %}

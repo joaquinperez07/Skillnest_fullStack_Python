@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/libros"><i class="bi bi-book-half me-2"></i>BookHub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link {% if request.path == '/libros' %}active{% endif %}" href="/libros">Mis Libros</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.path == '/explorar' %}active{% endif %}" href="/explorar">Explorar</a></li>
+                <li class="nav-item"><a class="nav-link {% if request.path == '/favoritos' %}active{% endif %}" href="/favoritos">Mis Favoritos</a></li>
+            </ul>
+            <div class="dropdown">
+                <a class="btn btn-outline-light btn-sm dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                    Bienvenido, {{ session['first_name'] }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
