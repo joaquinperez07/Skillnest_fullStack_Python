@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Perfil{% endblock %}
+{% block content %}
+<h1>Mi Perfil</h1>
+<section class="card detail">
+    <dl>
+        <dt>Nombre:</dt><dd>{{ user.full_name }}</dd>
+        <dt>E-mail:</dt><dd>{{ user.email }}</dd>
+        <dt>Miembro desde:</dt><dd>{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else '-' }}</dd>
+        <dt>Tareas totales:</dt><dd>{{ summary.total }}</dd>
+        <dt>Completadas:</dt><dd>{{ summary.completadas }}</dd>
+    </dl>
+</section>
+<p><a href="/dashboard">← Volver a Mis Tareas</a></p>
+{% endblock %}

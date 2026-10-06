@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Login / Registro{% endblock %}
+{% block content %}
+<header class="hero">
+    <h1><span class="logo">✔</span> TaskTrack</h1>
+    <p>Organiza tus tareas y proyectos</p>
+</header>
+
+<div class="two-cols">
+    <section class="card">
+        <h2>Crear Cuenta</h2>
+        <form action="/register" method="post">
+            <label>Nombre
+                <input type="text" name="first_name" value="{{ form.first_name or '' }}" required>
+            </label>
+            <label>Apellido
+                <input type="text" name="last_name" value="{{ form.last_name or '' }}" required>
+            </label>
+            <label>E-mail
+                <input type="email" name="email" value="{{ form.email or '' }}" required>
+            </label>
+            <label>Contraseña
+                <input type="password" name="password" required>
+            </label>
+            <label>Confirmar Contraseña
+                <input type="password" name="confirm_password" required>
+            </label>
+            <button class="btn btn-dark btn-block" type="submit">Registrarse</button>
+        </form>
+        <p class="hint"><a href="#login">¿Ya tienes cuenta? Inicia sesión</a></p>
+    </section>
+
+    <section class="card" id="login">
+        <h2>Iniciar Sesión</h2>
+        {% with messages = get_flashed_messages(with_categories=true, category_filter=["login_error"]) %}
+            {% for category, message in messages %}
+                <div class="flash error">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+        <form action="/login" method="post">
+            <label>E-mail
+                <input type="email" name="login_email" required>
+            </label>
+            <label>Contraseña
+                <input type="password" name="login_password" required>
+            </label>
+            <button class="btn btn-dark btn-block" type="submit">Iniciar Sesión</button>
+        </form>
+        <p class="hint"><a href="#">¿No tienes cuenta? Regístrate</a></p>
+    </section>
+</div>
+{% endblock %}

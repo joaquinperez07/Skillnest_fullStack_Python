@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar Categoría' if category else 'Nueva Categoría' }}{% endblock %}
+{% block content %}
+{% set v_name = form.name if form.name is defined else (category.name if category else '') %}
+<h1>{{ 'Editar Categoría' if category else 'Nueva Categoría' }}</h1>
+<form class="card form-card" method="post"
+      action="{{ '/categorias/actualizar/' ~ category.id if category else '/categorias/crear' }}">
+    <label>Nombre
+        <input type="text" name="name" value="{{ v_name }}" maxlength="100" required>
+    </label>
+    <div class="form-actions">
+        <button class="btn btn-dark" type="submit">{{ 'Actualizar' if category else 'Guardar' }}</button>
+        <a class="btn btn-outline" href="/categorias">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

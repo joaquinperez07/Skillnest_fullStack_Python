@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar Tarea' if task else 'Nueva Tarea' }}{% endblock %}
+{% block content %}
+{# Valores: primero lo que el usuario escribió (si hubo error), luego la tarea existente #}
+{% set v_title = form.title if form.title is defined else (task.title if task else '') %}
+{% set v_cat = form.category_id if form.category_id is defined else (task.category_id|string if task else '') %}
+{% set v_prio = form.priority if form.priority is defined else (task.priority if task else '') %}
+{% set v_status = form.status if form.status is defined else (task.status if task else 'Pendiente') %}
+{% set v_date = form.due_date if form.due_date is defined else (task.due_date.isoformat() if task else '') %}
+{% set v_desc = form.description if form.description is defined else (task.description if task else '') %}
+
+<h1>{{ 'Editar Tarea' if task else 'Nueva Tarea' }}</h1>
+
+{% if not categories %}
+    <div class="flash error">Primero debes <a href="/categorias/nueva">crear una categoría</a> para poder registrar tareas.</div>
+{% endif %}
+
+<form class="card form-card" method="post"
+      action="{{ '/tareas/actualizar/' ~ task.id if task else '/tareas/crear' }}">
+    <label>Título
+        <input type="text" name="title" value="{{ v_title }}" maxlength="150" required>
+    </label>
+    <label>Categoría
+        <select name="category_id" required>
+            <option value="">Selecciona una categoría</option>
+            {% for c in categories %}
+                <option value="{{ c.id }}" {% if v_cat == c.id|string %}selected{% endif %}>{{ c.name }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>Prioridad
+        <select name="priority" required>
+            <option value="">Selecciona prioridad</option>
+            {% for p in priorities %}
+                <option value="{{ p }}" {% if v_prio == p %}selected{% endif %}>{{ p }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    {% if task %}
+    <label>Estado
+        <select name="status" required>
+            {% for s in statuses %}
+                <option value="{{ s }}" {% if v_status == s %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    {% endif %}
+    <label>Fecha límite
+        <input type="date" name="due_date" value="{{ v_date }}" required>
+    </label>
+    <label>Descripción
+        <textarea name="description" rows="5" required>{{ v_desc }}</textarea>
+    </label>
+    <div class="form-actions">
+        <button class="btn btn-dark" type="submit">{{ 'Actualizar' if task else 'Guardar' }}</button>
+        <a class="btn btn-outline" href="{{ '/tareas/' ~ task.id if task else '/dashboard' }}">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

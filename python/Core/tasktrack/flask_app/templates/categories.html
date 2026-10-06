@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Categorías{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>Categorías</h1>
+    <a class="btn btn-blue" href="/categorias/nueva">+ Nueva Categoría</a>
+</div>
+
+<table>
+    <thead><tr><th>Nombre</th><th>Cantidad de tareas</th><th>Acciones</th></tr></thead>
+    <tbody>
+    {% for c in categories %}
+        <tr>
+            <td>{{ c.name }}</td>
+            <td>{{ c.total_tasks }}</td>
+            <td class="actions">
+                <a href="/categorias/{{ c.id }}">Ver</a>
+                <a href="/categorias/editar/{{ c.id }}">Editar</a>
+                <form action="/categorias/borrar/{{ c.id }}" method="post" class="inline"
+                      onsubmit="return confirm('¿Borrar esta categoría?');">
+                    <button class="link danger" type="submit">Borrar</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="3" class="empty">Aún no tienes categorías.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="note">Solo puedes borrar categorías que no tengan tareas asociadas.</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask-bcrypt = ">=1.0"
+pymysql = ">=1.1"
+cryptography = ">=42.0"
+flask = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.14"

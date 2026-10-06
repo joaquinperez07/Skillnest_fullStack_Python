@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}{{ task.title }}{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>{{ task.title }}</h1>
+    <div>
+        <a class="btn btn-outline" href="/tareas/editar/{{ task.id }}">Editar</a>
+        {% if task.status != 'Completada' %}
+        <form action="/tareas/completar/{{ task.id }}" method="post" class="inline">
+            <button class="btn btn-blue" type="submit">Marcar completada</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+<section class="card detail">
+    <dl>
+        <dt>Categoría:</dt><dd>{{ task.category_name }}</dd>
+        <dt>Prioridad:</dt><dd><span class="badge p-{{ task.priority|lower }}">{{ task.priority }}</span></dd>
+        <dt>Estado:</dt><dd><span class="badge s-{{ task.status|lower|replace(' ', '-') }}">{{ task.status }}</span></dd>
+        <dt>Fecha límite:</dt><dd>{{ task.due_date }}</dd>
+        <dt>Creado por:</dt><dd>{{ task.creator }}</dd>
+        <dt>Descripción:</dt><dd class="desc">{{ task.description }}</dd>
+    </dl>
+</section>
+
+<h2>Comentarios ({{ comments|length }})</h2>
+<section class="card">
+    {% for c in comments %}
+        <div class="comment">
+            <div>
+                <strong>{{ c.author }}</strong>
+                <span class="muted">{{ c.created_at.strftime('%Y-%m-%d') }}</span>
+                <p>{{ c.content }}</p>
+            </div>
+            {% if c.user_id == session.user_id %}
+            <form action="/comentarios/borrar/{{ c.id }}" method="post"
+                  onsubmit="return confirm('¿Borrar comentario?');">
+                <button class="link danger" type="submit">Borrar</button>
+            </form>
+            {% endif %}
+        </div>
+    {% else %}
+        <p class="empty">Aún no hay comentarios.</p>
+    {% endfor %}
+
+    <form class="comment-form" action="/tareas/{{ task.id }}/comentar" method="post">
+        <input type="text" name="content" placeholder="Escribe un comentario..." maxlength="500" required>
+        <button class="btn btn-dark" type="submit">Comentar</button>
+    </form>
+</section>
+
+<p><a href="/dashboard">← Volver a Mis Tareas</a></p>
+{% endblock %}

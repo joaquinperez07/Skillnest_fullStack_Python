@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Mis Tareas{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>Mis Tareas</h1>
+    <a class="btn btn-blue" href="/tareas/nueva">+ Nueva Tarea</a>
+</div>
+
+<form class="filters" method="get" action="/dashboard">
+    <input type="text" name="q" value="{{ search }}" placeholder="Buscar por título...">
+    <select name="status">
+        <option value="">Todos los estados</option>
+        {% for s in ["Pendiente", "En progreso", "Completada"] %}
+            <option value="{{ s }}" {% if status == s %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+    </select>
+    <button class="btn btn-dark" type="submit">Filtrar</button>
+    {% if status or search %}<a href="/dashboard">Limpiar</a>{% endif %}
+</form>
+
+<table>
+    <thead>
+        <tr><th>Título</th><th>Categoría</th><th>Prioridad</th><th>Fecha Límite</th><th>Estado</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+    {% for t in tasks %}
+        <tr>
+            <td>{{ t.title }}</td>
+            <td>{{ t.category_name }}</td>
+            <td><span class="badge p-{{ t.priority|lower }}">{{ t.priority }}</span></td>
+            <td>{{ t.due_date }}</td>
+            <td><span class="badge s-{{ t.status|lower|replace(' ', '-') }}">{{ t.status }}</span></td>
+            <td class="actions">
+                <a href="/tareas/{{ t.id }}">Ver</a>
+                <a href="/tareas/editar/{{ t.id }}">Editar</a>
+                {% if t.status != 'Completada' %}
+                    <form action="/tareas/completar/{{ t.id }}" method="post" class="inline">
+                        <button class="link" type="submit">Completar</button>
+                    </form>
+                    <form action="/tareas/borrar/{{ t.id }}" method="post" class="inline"
+                          onsubmit="return confirm('¿Borrar esta tarea?');">
+                        <button class="link danger" type="submit">Borrar</button>
+                    </form>
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="6" class="empty">No hay tareas para mostrar.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="two-cols dash-bottom">
+    <section>
+        <h2>Próximas tareas</h2>
+        <table>
+            <thead><tr><th>Título</th><th>Fecha Límite</th><th>Días restantes</th></tr></thead>
+            <tbody>
+            {% for u in upcoming %}
+                <tr><td>{{ u.title }}</td><td>{{ u.due_date }}</td><td>{{ u.days_left }}</td></tr>
+            {% else %}
+                <tr><td colspan="3" class="empty">No tienes tareas próximas.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <aside>
+        <div class="card summary">
+            <h2>Resumen</h2>
+            <p>Total de tareas: <strong>{{ summary.total }}</strong></p>
+            <p>Pendientes: <strong>{{ summary.pendientes }}</strong></p>
+            <p>En progreso: <strong>{{ summary.en_progreso }}</strong></p>
+            <p>Completadas: <strong>{{ summary.completadas }}</strong></p>
+            <hr>
+            <p>Prioridad alta: <strong>{{ summary.alta }}</strong></p>
+            <p>Prioridad media: <strong>{{ summary.media }}</strong></p>
+            <p>Prioridad baja: <strong>{{ summary.baja }}</strong></p>
+        </div>
+        <div class="note">Las tareas se muestran ordenadas por fecha (las más cercanas primero).</div>
+    </aside>
+</div>
+{% endblock %}
