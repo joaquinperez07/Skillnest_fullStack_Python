@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block contenido %}
+<header class="barra">
+    <h1>Bienvenid@ {{ session["nombre"] }}</h1>
+    <nav>
+        <a class="boton" href="/nueva">Donar Peluche</a>
+        <a class="boton" href="/logout">Cerrar Sesión</a>
+    </nav>
+</header>
+
+<h2>Todos los Peluches</h2>
+<table class="lista">
+    {% for p in peluches %}
+    <tr>
+        <td><strong>{{ p.nombre }}</strong></td>
+        <td>Donador: {{ p.donador }}</td>
+        <td><a href="/ver/{{ p.id }}">Ver</a></td>
+        <td class="acciones">
+            {% if p.adoptante_id %}
+                <button class="adoptado" disabled>ADOPTADO</button>
+            {% elif p.donador_id != session["usuario_id"] %}
+                <form action="/adoptar/{{ p.id }}" method="POST"><button type="submit">Adoptar</button></form>
+            {% endif %}
+
+            {% if p.donador_id == session["usuario_id"] %}
+                <a class="boton" href="/editar/{{ p.id }}">Editar</a>
+                <form action="/borrar/{{ p.id }}" method="POST"><button type="submit">Borrar</button></form>
+            {% endif %}
+        </td>
+    </tr>
+    {% else %}
+    <tr><td>Todavía no hay peluches donados.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

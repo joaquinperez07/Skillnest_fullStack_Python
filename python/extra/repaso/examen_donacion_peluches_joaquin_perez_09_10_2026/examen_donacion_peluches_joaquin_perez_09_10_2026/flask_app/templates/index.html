@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="dos-columnas">
+    <section>
+        <h1>Registro</h1>
+        {% with mensajes = get_flashed_messages(category_filter=["registro"]) %}
+            {% for m in mensajes %}<p class="error">{{ m }}</p>{% endfor %}
+        {% endwith %}
+        <form action="/registro" method="POST">
+            <label>Nombre <input type="text" name="nombre"></label>
+            <label>Apellido <input type="text" name="apellido"></label>
+            <label>E-mail <input type="text" name="email"></label>
+            <label>Contraseña <input type="password" name="password"></label>
+            <label>Conf. Contraseña <input type="password" name="confirmar_password"></label>
+            <button type="submit">Registrar</button>
+        </form>
+    </section>
+
+    <section>
+        <h1>Inicio de Sesión</h1>
+        {% with mensajes = get_flashed_messages(category_filter=["login"]) %}
+            {% for m in mensajes %}<p class="error">{{ m }}</p>{% endfor %}
+        {% endwith %}
+        <form action="/login" method="POST">
+            <label>E-mail <input type="text" name="email"></label>
+            <label>Contraseña <input type="password" name="password"></label>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block contenido %}
+<header class="barra">
+    <h1>{{ peluche.nombre }}</h1>
+    <nav>
+        <a class="boton" href="/dashboard">Inicio</a>
+        <a class="boton" href="/logout">Cerrar Sesión</a>
+    </nav>
+</header>
+
+<dl class="detalle">
+    <dt>Dueño:</dt><dd>{{ peluche.donador }}</dd>
+    <dt>Descripción:</dt><dd>{{ peluche.descripcion }}</dd>
+    {% if peluche.adoptante %}
+    <dt>Adoptado por:</dt><dd>{{ peluche.adoptante }}</dd>
+    {% endif %}
+    <dt>Visitas:</dt><dd>{{ peluche.visitas }}</dd>
+</dl>
+{% endblock %}

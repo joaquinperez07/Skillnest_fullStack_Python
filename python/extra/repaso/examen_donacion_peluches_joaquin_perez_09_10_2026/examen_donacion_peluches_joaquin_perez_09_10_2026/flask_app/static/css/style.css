@@ -1,0 +1,23 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #222; background: #fafafa; }
+.pagina { width: min(900px, calc(100% - 32px)); margin: 40px auto; }
+.dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+@media (max-width: 700px) { .dos-columnas { grid-template-columns: 1fr; } }
+h1 { margin: 0 0 16px; font-size: 26px; }
+h2 { font-size: 18px; font-weight: normal; }
+label { display: block; margin-bottom: 12px; }
+input, textarea { display: block; width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #888; border-radius: 4px; font: inherit; }
+button, .boton { display: inline-block; padding: 6px 12px; border: 1px solid #555; border-radius: 4px; background: #fff; color: #222; font: inherit; text-decoration: none; cursor: pointer; }
+button:hover, .boton:hover { background: #eee; }
+button.adoptado { background: #999; color: #fff; cursor: default; }
+.error { color: #c00; margin: 4px 0; }
+.barra { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.barra h1 { margin: 0; }
+.barra nav { display: flex; gap: 8px; }
+.lista { width: 100%; border-collapse: collapse; }
+.lista td { padding: 10px 8px; border-bottom: 1px solid #ddd; }
+.acciones { display: flex; gap: 8px; align-items: center; justify-content: flex-end; }
+.acciones form { margin: 0; }
+.detalle { display: grid; grid-template-columns: 140px 1fr; gap: 12px; }
+.detalle dt { font-weight: bold; }
+.detalle dd { margin: 0; }

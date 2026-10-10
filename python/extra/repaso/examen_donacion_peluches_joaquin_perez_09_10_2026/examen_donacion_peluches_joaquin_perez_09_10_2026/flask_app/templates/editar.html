@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block contenido %}
+<header class="barra">
+    <h1>Editar Donación</h1>
+    <nav>
+        <a class="boton" href="/dashboard">Inicio</a>
+        <a class="boton" href="/logout">Cerrar Sesión</a>
+    </nav>
+</header>
+
+{% with mensajes = get_flashed_messages(category_filter=["peluche"]) %}
+    {% for m in mensajes %}<p class="error">{{ m }}</p>{% endfor %}
+{% endwith %}
+
+<form action="/actualizar/{{ peluche.id }}" method="POST">
+    <label>Nombre <input type="text" name="nombre" value="{{ peluche.nombre }}"></label>
+    <label>Descripción <textarea name="descripcion" rows="6">{{ peluche.descripcion }}</textarea></label>
+    <button type="submit">Guardar</button>
+</form>
+{% endblock %}

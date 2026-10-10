@@ -1,0 +1,32 @@
+CREATE DATABASE IF NOT EXISTS donacion_peluches_db CHARACTER SET utf8mb4;
+USE donacion_peluches_db;
+
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  apellido VARCHAR(50) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY email_unico (email)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS peluches (
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(100) NOT NULL,
+  descripcion TEXT NOT NULL,
+  visitas INT NOT NULL DEFAULT 0,
+  donador_id INT NOT NULL,
+  adoptante_id INT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY nombre_unico (nombre),
+  CONSTRAINT fk_peluches_donador FOREIGN KEY (donador_id)
+    REFERENCES usuarios (id) ON DELETE CASCADE,
+  CONSTRAINT fk_peluches_adoptante FOREIGN KEY (adoptante_id)
+    REFERENCES usuarios (id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
