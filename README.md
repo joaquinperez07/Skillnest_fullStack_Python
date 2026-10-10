@@ -13,7 +13,9 @@ Skillnest_fullStack_Python/
 ├── python/          # Ejercicios y proyectos en Python
 └── README.md
 ```
+[`/Core`](./python/Core/) – Cores realizados
 
+[`/Flask`](./python/flask/) – Tareas, plantillas Jinja2 y base de datos 
 <!-- Completa esta sección con tus carpetas/módulos reales, por ejemplo:
 - `python/01_fundamentos/` – variables, condicionales, bucles
 - `python/02_funciones/` – funciones y módulos
@@ -22,8 +24,11 @@ Skillnest_fullStack_Python/
 
 ## 🛠️ Tecnologías
 
-- Python 3
+- Python
 - Git y GitHub
+- Flask
+- HTML/CSS
+- JavaScript
 
 <!-- Agrega aquí lo que uses: Django, Flask, SQL, HTML/CSS, JavaScript, etc. -->
 
@@ -32,31 +37,7 @@ Skillnest_fullStack_Python/
 - [Python 3.10+](https://www.python.org/downloads/)
 - Git
 
-## 🚀 Cómo usarlo
-
-1. Clona el repositorio:
-
-   ```bash
-   git clone https://github.com/joaquinperez07/Skillnest_fullStack_Python.git
-   cd Skillnest_fullStack_Python
-   ```
-
-2. (Opcional) Crea y activa un entorno virtual:
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate      # Linux / macOS
-   venv\Scripts\activate         # Windows
-   ```
-
-3. Entra a la carpeta de Python y ejecuta un archivo:
-
-   ```bash
-   cd python
-   python nombre_del_archivo.py
-   ```
-
-## 🎯 Objetivos de aprendizaje
+## Objetivos de aprendizaje
 
 - Dominar los fundamentos de Python
 - Construir aplicaciones web full stack
